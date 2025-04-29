@@ -9,12 +9,12 @@ const init = () => {
   context.fillRect(0, 0, 200, 200);
 };
 
-//initially mouse X and mouse Y positions are 0
+// Initially mouse X and mouse Y positions are 0
 let mouseX = 0;
 let mouseY = 0;
 let isDragged = false;
 
-//Events for touch and mouse
+// Events for touch and mouse
 let events = {
   mouse: {
     down: "mousedown",
@@ -30,10 +30,10 @@ let events = {
 
 let deviceType = "";
 
-//Detech touch device
+// Detect touch device
 const isTouchDevice = () => {
   try {
-    //We try to create TouchEvent. It would fail for desktops and throw error.
+    // We try to create TouchEvent. It would fail for desktops and throw error.
     document.createEvent("TouchEvent");
     deviceType = "touch";
     return true;
@@ -43,26 +43,27 @@ const isTouchDevice = () => {
   }
 };
 
-//Get left and top of canvas
+// Get left and top of canvas
 let rectLeft = canvas.getBoundingClientRect().left;
 let rectTop = canvas.getBoundingClientRect().top;
 
-//Exact x and y position of mouse/touch
+// Exact x and y position of mouse/touch
 const getXY = (e) => {
   mouseX = (!isTouchDevice() ? e.pageX : e.touches[0].pageX) - rectLeft;
   mouseY = (!isTouchDevice() ? e.pageY : e.touches[0].pageY) - rectTop;
 };
 
 isTouchDevice();
-//Start Scratch
+
+// Start Scratch
 canvas.addEventListener(events[deviceType].down, (event) => {
   isDragged = true;
-  //Get x and y position
+  // Get x and y position
   getXY(event);
   scratch(mouseX, mouseY);
 });
 
-//mousemove/touchmove
+// Mousemove/touchmove
 canvas.addEventListener(events[deviceType].move, (event) => {
   if (!isTouchDevice()) {
     event.preventDefault();
@@ -73,23 +74,37 @@ canvas.addEventListener(events[deviceType].move, (event) => {
   }
 });
 
-//stop drawing
+// Stop drawing
 canvas.addEventListener(events[deviceType].up, () => {
   isDragged = false;
 });
 
-//If mouse leaves the square
+// If mouse leaves the square
 canvas.addEventListener("mouseleave", () => {
   isDragged = false;
 });
 
 const scratch = (x, y) => {
-  //destination-out draws new shapes behind the existing canvas content
+  // destination-out draws new shapes behind the existing canvas content
   context.globalCompositeOperation = "destination-out";
   context.beginPath();
-  //arc makes circle - x,y,radius,start angle,end angle
+  // arc makes circle - x,y,radius,start angle,end angle
   context.arc(x, y, 12, 0, 2 * Math.PI);
   context.fill();
 };
 
-window.onload = init();
+// Array of names
+const names = ["Karthik", "Bachu", "Megha"];
+
+// Function to display a random name
+function displayRandomName() {
+  const randomIndex = Math.floor(Math.random() * names.length);
+  const randomName = names[randomIndex];
+  document.getElementById("randomName").textContent = randomName;
+}
+
+// Ensure both `init` and `displayRandomName` are called after the page loads
+window.onload = () => {
+  init();
+  displayRandomName();
+};
