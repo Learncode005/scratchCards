@@ -4,8 +4,10 @@
   box-sizing: border-box;
 }
 body {
-  height: 100vh;
-  background: linear-gradient(135deg, #c3a3f1, #6414e9);
+    height: 100vh;
+    background: linear-gradient(135deg, #c3a3f1, #6414e9);
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
 }
 .container {
   width: 31em;
