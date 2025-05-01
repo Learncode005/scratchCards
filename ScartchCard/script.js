@@ -94,7 +94,7 @@ const scratch = (x, y) => {
 };
 
 // Array of names
-const names = ["Karthik", "Bachu", "Megha"];
+const names = ["Tanvika","Chitti talli","bangaram","Karthik", "Bachu", "Megha"];
 
 // Function to display a random name
 function displayRandomName() {
