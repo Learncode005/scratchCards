@@ -53,3 +53,6 @@ body {
   -webkit-user-select: none;
   user-select: none;
 }
+html {
+    overflow-x: hidden;
+}
